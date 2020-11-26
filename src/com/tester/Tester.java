@@ -1,4 +1,4 @@
-package packages.tester;
+package com.tester;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
+import com.factory.Driver;
 
 import java.util.concurrent.TimeUnit;
 
@@ -47,7 +48,7 @@ public class Tester extends Thread {
     }
 
     private void test() throws InterruptedException {
-        WebDriver driver = null;
+        WebDriver driver = Driver.getDriver("chrome");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
         options.addArguments("enable-automation");
@@ -60,11 +61,11 @@ public class Tester extends Thread {
         options.addArguments("--dns-prefetch-disable");
         options.addArguments("--disable-gpu");
         options.addArguments("disable-features=NetworkService");
-        try {
-            driver = new ChromeDriver(options);
-        } catch (org.openqa.selenium.WebDriverException e) {
-            System.out.println("==== " + this.name + " Failed to startup ChromeDriver" + " ====");
-        }
+//        try {
+//            driver = new ChromeDriver(options);
+//        } catch (org.openqa.selenium.WebDriverException e) {
+//            System.out.println("==== " + this.name + " Failed to startup ChromeDriver" + " ====");
+//        }
 
         if (driver != null) {
             try {

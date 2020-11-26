@@ -1,5 +1,6 @@
 package com.tester;
 
+import com.controller.Cases;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,7 +23,7 @@ public class Tester extends Thread {
     }
 
     public static void main(String[] args) {
-        int threadCount = 1;
+        int threadCount = 5;
 //        if(args[0] != null ) {
 //            try {
 //                threadCount = Integer.parseInt(args[0]);
@@ -40,7 +41,7 @@ public class Tester extends Thread {
     @Override
     public void run() {
         try {
-            Thread.sleep(5000);
+            Thread.sleep(1000);
             test();
         } catch (InterruptedException e) {
             System.out.println("sleep interrupted");
@@ -48,58 +49,20 @@ public class Tester extends Thread {
     }
 
     private void test() throws InterruptedException {
-        WebDriver driver = Driver.getDriver("chrome");
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("start-maximized");
-        options.addArguments("enable-automation");
-//        options.addArguments("--headless");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-infobars");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--disable-browser-side-navigation");
-        options.addArguments("--disable-extensions");
-        options.addArguments("--dns-prefetch-disable");
-        options.addArguments("--disable-gpu");
-        options.addArguments("disable-features=NetworkService");
-//        try {
-//            driver = new ChromeDriver(options);
-//        } catch (org.openqa.selenium.WebDriverException e) {
-//            System.out.println("==== " + this.name + " Failed to startup ChromeDriver" + " ====");
-//        }
-
-        if (driver != null) {
-            try {
-                driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
-                driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-
-                driver.get("https://www.templater.us/");
-
-                if (this.index % 5 == 1) {   //The 1st User
-                    loginScreen(driver, "giottester@gmail.com", "rN3EPwcw4Xm956s");
-                } else if (this.index % 5 == 2) {   //The 2nd User
-                    loginScreen(driver, "gkmagellan@gmail.com", "rN3EPwcw4Xm956s");
-                }
-
-                //Select Service Provider
-                Thread.sleep(5000);
-                selectByIndexAndSubmitByClass(driver, "npi", 1, "actionBtn");
-
-                //Select a claim template
-                Thread.sleep(1000);
-                selectByValueAndSubmit(driver, "selTemplate", "SCREEN_DA_CLAIM", "btnContinue");
-
-                //Fill in a claim and submit
-                Thread.sleep(1000);
-
-
-            } catch (java.lang.RuntimeException re) {
-                System.out.println("==== " + this.name + " Got Error in WCS Test " + "====");
-            } finally {
-                System.out.println("**** " + this.name + " Finised WCS Test " + "****");
-                driver.close();
-                driver.quit();
-            }
+//        WebDriver driver = Driver.getDriver("chrome", false);
+        Cases c = new Cases("chrome", false);
+        try {
+            c.SetWindowSize(1920, 1080);
+            c.GoToUrl("https://www.templater.us/");
+        } catch (java.lang.RuntimeException e) {
+            System.out.println(e);
+            System.out.println("==== " + this.name + " Got Error in Test " + "====");
+        } finally {
+            System.out.println("**** " + this.name + " Finished Test " + "****");
+//            driver.close();
+            c.close();
         }
+
     }
 
     private void loginScreen(WebDriver driver, String usernameStr, String passwordStr) throws InterruptedException {

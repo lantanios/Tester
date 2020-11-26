@@ -4,12 +4,7 @@ import com.controller.Cases;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
-import com.factory.Driver;
-
-import java.util.concurrent.TimeUnit;
 
 public class Tester extends Thread {
     private final String name;
@@ -22,6 +17,7 @@ public class Tester extends Thread {
         this.index = index;
     }
 
+
     public static void main(String[] args) {
         int threadCount = 5;
 //        if(args[0] != null ) {
@@ -30,6 +26,8 @@ public class Tester extends Thread {
 //            }catch(Exception e) {
 //                System.out.println(e.toString());
 //            }
+
+
 //        }
         for (int i = 1; i <= threadCount; i++) {
             Thread t = new Tester("Thread " + i, i);
@@ -59,8 +57,7 @@ public class Tester extends Thread {
             System.out.println("==== " + this.name + " Got Error in Test " + "====");
         } finally {
             System.out.println("**** " + this.name + " Finished Test " + "****");
-//            driver.close();
-            c.close();
+//            c.close();
         }
 
     }

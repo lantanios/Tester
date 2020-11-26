@@ -7,15 +7,13 @@ public class Tester extends Thread {
     private final int index;
 
     public Tester(String name, int index) {
-        System.setProperty("webdriver.chrome.driver", "/home/lanta/IdeaProjects/chromedriver");
-        System.setProperty("webdriver.chrome.silentOutput", "true");
         this.name = name;
         this.index = index;
     }
 
 
     public static void main(String[] args) {
-        int threadCount = 5;
+        int threadCount = 10;
 //        if(args[0] != null ) {
 //            try {
 //                threadCount = Integer.parseInt(args[0]);
@@ -43,7 +41,6 @@ public class Tester extends Thread {
     }
 
     private void test() throws InterruptedException {
-//        WebDriver driver = Driver.getDriver("chrome", false);
         Cases c = new Cases("firefox", true);
         try {
             c.SetWindowSize(1920, 1080);

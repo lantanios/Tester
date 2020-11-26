@@ -13,7 +13,7 @@ public class Tester extends Thread {
 
 
     public static void main(String[] args) {
-        int threadCount = 10;
+        int threadCount = 1;
 //        if(args[0] != null ) {
 //            try {
 //                threadCount = Integer.parseInt(args[0]);
@@ -52,6 +52,7 @@ public class Tester extends Thread {
             System.out.println("==== " + this.name + " Got Error in Test " + "====");
         } finally {
             System.out.println("**** " + this.name + " Finished Test " + "****");
+            c.quit();
         }
 
     }

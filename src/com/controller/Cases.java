@@ -31,7 +31,7 @@ public class Cases {
         } else throw new IllegalStateException("This driver does not support JavaScript!");
     }
 
-    public void close() {
+    public void quit() {
         driver.quit();
     }
 
